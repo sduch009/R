@@ -1,2 +1,2 @@
 # R
-Learning R
+Learning R, done in RStudio.
