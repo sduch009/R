@@ -1,0 +1,45 @@
+# R Statistics Essential Training
+# Ex01_08
+# Converting tabular data to row data
+
+# Load data
+?UCBAdmissions
+str(UCBAdmissions)
+UCBAdmissions
+
+# The problem
+admit.fail <- (UCBAdmissions$Admit) # Doesn't work
+barplot(UCBAdmissions$Admit) # Doesn't work
+plot(UCBAdmissions) #DOES work but not what we want
+
+# Get marginal frequencies from original table
+margin.table(UCBAdmissions, 1) # Admit
+margin.table(UCBAdmissions, 2) #Gender
+margin.table(UCBAdmissions, 3) #Dept
+margin.table(UCBAdmissions)    #Total
+?margin.table # For a contingency table in array form, compute the sum of table entries for a given index.
+
+#Save marginals as new table:
+admit.dept <- margin.table(UCBAdmissions, 3) # DEpt
+str(admit.dept)
+barplot(admit.dept) # Creates bar plot
+admit.dept # Show frequencies USEFUL FOR DISTRIBUTIONS AND BOXPLOTS!!
+prop.table(admit.dept) # Show as proportions
+round(prop.table(admit.dept), 2) # Show as proportions w/ 2 digts
+round(prop.table(admit.dept), 2) * 100 # Gives percentage w/o decimal places
+?prop.table # This is really sweep(x, margin, margin.table(x, margin), "/") for newbies, except that if margin has length zero, then one gets x/sum(x).
+?round #round rounds the values in its first argument to the specified number of decimal places (default 0).
+
+# Go from table to one row per case
+admit1 <- as.data.frame.table(UCBAdmissions) # Coreces to data frame
+admit2 <- lapply(admit1, function(x)rep(x, admit1$Freq)) # Repeats each row by Freq
+admit3 <- as.data.frame(admit2) # converts from list back to data frame
+admit4 <- admit3[, -4] # Removes the 4th column
+
+#This is to do the whole thing in one line:
+admit.rows <- as.data.frame(lapply(as.data.frame.table(UCBAdmissions), function(x)rep(x, as.data.frame.table(UCBAdmissions)$Freq)))[, -4]
+# NOW IF YOU HAVE NEW DATASETS, ALL YOU HAVE TO DO IS REPLACE UCBADMISSIONS BY THE NEW DATASET, AND CHANGE THE -4 BY THE COLUMN THAT HAS THE FREQUENCIES IN IT
+str(admit.rows)
+admit.rows[1:10,] # View first ten rows of tata
+
+rm(list = ls()) # Clean up
