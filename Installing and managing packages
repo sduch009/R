@@ -1,6 +1,6 @@
 # R Statistics Essential Training
 # Ex01_04
-# Taking a first look at the interface
+# Installing and Managing Packages
 
 # LISTS OF PACKAGES
 browseURL("http://cran.r-project.org/web/views/")# Opens CRAN R Proj packages
