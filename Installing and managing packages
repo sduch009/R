@@ -1,0 +1,49 @@
+# R Statistics Essential Training
+# Ex01_04
+# Taking a first look at the interface
+
+# LISTS OF PACKAGES
+browseURL("http://cran.r-project.org/web/views/")# Opens CRAN R Proj packages
+
+browseURL("https://cran.r-project.org/web/views/Finance.html") # For finance-specific packages
+
+#See also Crantastic.org
+browseURL("http://crantastic.org/")
+
+# See current packages
+library()  # Brings up editor list of installed packages
+search() # Shows packages that are currently loaded
+
+# TO INSTALL AND USE PACKAGES
+# Can use menus: Tools > Install Packages...(or use packages window)
+# Or can use scripts, which can be saved and incorporated in source
+install.packages("ggplot2") # Downloads package from CRAN and installs in R
+?install.packages # "?" provides linked to help for this cmd
+
+library("ggplot2") # makes package AVAILABLE; often used for loading in scripts
+require("ggplot2") # Preferred for loading in functions; maybe better?..does same thins as library afawk
+library(help = "ggplot2") # Brings up documentation in editor
+
+#VIGNETTES
+vignette(package = "grid") # Brings up list of vignettes (examples) in editor window
+?vignette
+browseVignettes(package = "grid") # Open web page with hyperlinks for vignette PDFs etc.
+#if links are DEAD, go to CRAN and search by name
+vignette()  # Brings up list of all vignettes for currently installed packages
+
+# UPDATE PACKAGES
+# In RStudio, Tools > Check for Package Updates; 
+update.packages() # Checks for updates; do periodically
+?update.packages
+
+#UNLOAD/REMOVE PACKAGES
+# By default, all loaded packages are unloaded when R quits
+# Can also open Packages window and manually uncheck
+# Or can use this code to unload packages:
+detach("package:ggplot2", unload = TRUE)
+?detach
+
+# To permanently remove (delete) package
+install.packages("psytabs") # Adds psytabs
+remove.packages("psytabs") # Deltes it
+?remove.packages
