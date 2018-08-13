@@ -1,0 +1,38 @@
+# R Statistics Essential Training
+# Ex01_07
+# Importing data
+
+# EXCEL FILES
+# Don't do it
+browseURL("https://cran.r-project.org/doc/manuals/R-data.html#Reading-Excel-spreadsheets")
+
+# Infinitely more simple and convenient is to use a .txt file or .csv file
+
+#TEXT FILES
+# Load a spreadsheet that has been saved as tab-delimited text file
+# Need to give complete address to file
+# This command gives an error on missing data, but works on complete data.
+# "header = TRUE" means the first line is a header
+trends.txt <- read.table("C:\\Users\\SADUCHES\\Desktop\\GoogleTrends.txt", header = TRUE)
+#For WINDOWS: set working directory to Desktop, then use path 'R/GoogleTrends.txt'
+?read.table
+
+# This works with missing data by specifying the separator: /t is for tabs, sep = "," for commas
+# R converts missing to "NA"
+trends.txt <- read.table("C:\\Users\\SADUCHES\\Desktop\\GoogleTrends.txt", header = TRUE, sep = "\t")
+str(trends.txt) # This gives structure of object sntxt
+# Or click on file in the Global Environment viewer, which brings up this:
+View(trends.txt)
+?View
+
+# CSV FILES (Also more relevant for SAS)
+# Dont have to specify delimiters for missing data because CSV means "comma separated values"
+trends.csv <- read.table("C:\\Users\\SADUCHES\\Desktop\\GoogleTrends.csv", header = TRUE, sep = "\t")
+##Did not work without the sep = "\t") ...
+#Having some problems, but found you can see how the object is identified with file.choose()
+file.choose()
+str(trends.csv)
+View(trends.csv)
+# view not working, probably formatting issue due to copy//paste...
+
+rm(list = ls()) # Clean up
