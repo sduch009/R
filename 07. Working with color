@@ -1,0 +1,72 @@
+# R Statistics Essential Training
+# Ex01_09
+# Working with color
+
+# Barplot
+x = c(12, 4, 21, 17, 13, 9)
+barplot(x)
+
+# R specifies color in several ways
+?colors # Returns the built-in color names which R knows about.
+# Web page with PDFs of colors in R
+browseURL("http://research.stowers-institute.org/efg/R/Color/Chart/")
+
+# Color names
+# R has names for 657 colors, arranged alphabetically except for whie (first)
+# Gray or Grey are both acceptable
+colors() # Gives list of color names 
+barplot(x, col = "slategray3")
+
+# Color numbers
+# From color name's position in alphabetically-order vector of colors()
+# Specifiy colors () [i] where i is index number in vector
+barplot(x, col = colors() [102]) # darkseagreen
+barplot(x, col = colors() [602]) # Back to slategray3
+
+# RGB Triplets
+# Separately specifiy the red, green and blue components of the color
+#By default, colors are specified in 0-1 range
+# Can specify 0-255 range by adding "max = 255"
+?rgb # This function creates colors corresponding to the given intensities (between 0 and max) of the red, green and blue primaries. The colour specification refers to the standard sRGB colorspace (IEC standard 61966).
+#Can convert color names to rgb with "col2rgb"
+?col2rgb # R color to RGB (red/green/blue) conversion.
+col2rgb("navyblue") # Yields (0, 0, 128)
+barplot(x,col = rgb(.54, .0, .0)) # dark red, with rgb, .0 means black, 1.0 means white
+barplot(x, col = rgb(159, 182, 205, max = 255)) # back to slategray3
+
+# RGB Hexcodes
+# Can also use shortcut hexcodes (base 16) which are equivalent to
+# RGB on the 0-255 scale, as FF in hexd equals 255 in decimal you say its hexcode by putting # before number
+barplot(x, col = "#FFEBCD") # blanchealmond
+barplot(x, col = "#9FB6CD") # Back to slategray
+
+# Multiple Colors
+# Can specify several colors (using coding method) in vector
+barplot(x, col = c("red", "blue")) # colors will cycle
+barplot(x, col = c("red", "blue", "green", "yellow"))
+
+# Using color paletts
+#Palettes can be more attractive and more informative
+#easiest to use
+help(package=colorspace) # Lots of infor on color psaces
+?palette #View or manipulate the color palette which is used when a col= has a numeric index
+
+# Built-in palettes
+# Rainbow(n, s = 1, v = 1, start = 0, end = max(1, n - 1)/n, alpha = 1)
+# heat.colors(n, alpha = 1) # Yellow through red
+# terrain.colors(n, alpha = 1) # Gray through green
+# topo.colors(n, alpha = 1) # Purple through tan
+# cm.colors(n, alpha = 1) # Blues and pinks
+help(package=colorspace)
+palette()
+barplot(x, col = 1:6)
+barplot(x, col = rainbow(6))
+barplot(x, col = heat.colors(6)) #for heatmap
+barplot(x, col = terrain.colors(6))
+barplot(x, col = topo.colors(6))
+barplot(x, col = cm.colors(6)) #
+palette("default") # return to default palette
+
+rm(list = ls()) # Clean up
+
+
