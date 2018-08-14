@@ -1,0 +1,46 @@
+library(quantmod)
+
+### PURSUING FROM THE LAST EXAMPLE...###
+read.csv("AAPL-Data.csv", row.names=1)
+AAPL <- read.csv("AAPL-Data.csv", row.names=1)
+AAPL
+
+data <- AAPL
+
+data
+# HAVE WAY TOO MUCH DATA TO PLOT TOGETHER SO NOW:
+plot(data) # TOO MUCH
+
+Cl(data) # means give "Close" data points from "data"
+plot(Cl(data), type='l') # means plot the 'close' points from 'data in 'line'-type graph
+# HAVE TO BE REALLY CAREFUL FOR ADJUSTMENT FOR SHARE SPLITS AND DIVIDENDS BECAUSE DATASET NOT ALWAYS ADJUSTED
+# NEVER USE CLOSE PRICES ALONE???
+plot(Ad(data), type='l') #Ad means "Adjusted" USE ADJUSTED
+data[,"Adjusted"] # is the same thing
+
+#calculate simple returns of the data
+length(Ad(data))
+#what if we wanted total return between the period
+100*((Ad(data)[2924] - Ad(data)[1])/ Ad(data)[1])
+#what if we wanted return between the last half of period
+100*((Ad(data)[2924] - Ad(data)[2924/2])/ Ad(data)[2924/2])
+
+#Or if you want to calculate daily return of the adjusted close of data
+dailyReturn(Ad(as.xts(data)), type='arithmetic')
+#can also plot
+plot(dailyReturn(Ad(as.xts(data)), type='arithmetic'), type='l')
+#as.xts 
+#to calculat cumulative product
+plot(cumprod(1+dailyReturn(Ad(as.xts(data)), type='arithmetic')))
+
+#calculating logreturns
+plot(diff(log(Ad(data))), type='l')
+#can do same thign for open or close...
+
+#Calculate multiple logreturns at once
+head(data[,c("Close","Adjusted")])
+diff(log(data[,c("Close", "Adjusted")]))  
+
+apply(data[,c("Close", "Adjusted")], 2, length)
+apply(data[,c("Close", "Adjusted")], 2, log)
+apply(apply(data[,c("Close", "Adjusted")], 2, log), 2, diff)
