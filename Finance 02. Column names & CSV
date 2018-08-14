@@ -29,7 +29,7 @@ AAPL["2018-08-06", "High"]
 AAPL <- df
 AAPL # AAPL now holds all data
 head(AAPL)
-colnames(AAPL) <- c("Open", "High", "Low", "Close", "Volume") # DONT FORGET TO CREATE VECTORE WITH THE "C" IN FRONT
+colnames(AAPL) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted") # DONT FORGET TO CREATE VECTOR WITH THE "C" IN FRONT
 #### NOW TO SAVE TO CSV  (var, "name.csv")
 write.csv(AAPL, "AAPL-Data.csv")  
 read.csv("AAPL-Data.csv") #to confirm it has the same data, now add row names and confirm:
