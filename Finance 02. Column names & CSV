@@ -1,0 +1,36 @@
+df <- data.frame()
+df
+
+install.packages("quantmod")
+library(quantmod)
+
+df <- data.frame(getSymbols("AAPL", auto.assign = F))# Goes to Yahoo!Finance, gets data and stores it into our df # auto.assign = F: if you dont, its not going to store to this variable....
+?getSymbols.yahoo
+
+df #prints df with limits
+head(df) #prints top (oldest) 5 rows?
+tail(df) #prints last (most recent) 5 rows
+
+AAPL <- tail(df)
+
+AAPL
+#In order to rename column names
+colnames(AAPL) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
+AAPL # The columns are now renamed
+AAPL[,"Open"] # "Find the column with name "Open" and give me all its row values"
+AAPL[,1] # = equivalent
+
+AAPL[,c(1, 5)]
+AAPL[,c("Open", "Volume")] 
+
+AAPL["2018-08-06", "High"]
+
+##### Now for CSV ####
+AAPL <- df
+AAPL # AAPL now holds all data
+head(AAPL)
+colnames(AAPL) <- c("Open", "High", "Low", "Close", "Volume") # DONT FORGET TO CREATE VECTORE WITH THE "C" IN FRONT
+#### NOW TO SAVE TO CSV  (var, "name.csv")
+write.csv(AAPL, "AAPL-Data.csv")  
+read.csv("AAPL-Data.csv") #to confirm it has the same data, now add row names and confirm:
+head(read.csv("AAPL-Data.csv", row.names=1)) #tells it that the names of the columnns are in row 1
