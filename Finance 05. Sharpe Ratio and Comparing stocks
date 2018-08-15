@@ -1,0 +1,40 @@
+
+######
+TSLA <- dailyReturn(Ad(getSymbols("TSLA", auto.assign=F))) #gets only adjusted values with "Ad" (dont forget you need quantmod for it to work)
+charts.PerformanceSummary(TSLA)
+
+MSFT <- dailyReturn(Ad(getSymbols("MSFT", auto.assign=F))) #gets only adjusted values with "Ad" (dont forget you need quantmod for it to work)
+charts.PerformanceSummary(MSFT)
+
+#What if we want to chart these 2 together:
+colnames(MSFT) <- c("MSFT")
+colnames(TSLA) <- c("TSLA")
+head(TSLA)
+head(MSFT)
+
+dim(TSLA) #dim = dimensions (vectors,)
+dim(MSFT)
+merge(TSLA, MSFT)
+dim(merge(TSLA, MSFT))
+head(merge(TSLA, MSFT)) #TSLA has NAs since MSFT started trading 3 years earlier
+
+merge(TSLA, MSFT, all=F)
+head(merge(TSLA, MSFT, all=F))
+dim(merge(TSLA, MSFT, all=F))
+
+MSFTvsTSLA <- merge(TSLA, MSFT, all=F)
+MSFTvsTSLA
+charts.PerformanceSummary(MSFTvsTSLA)
+
+#### SHARPE RATIO, : a measure of risk-adjusted return, the HIGHER THE BETTER:
+### SHARPE RATION = (expected return - risk free rate) / Stdev. of Returns
+### Sharpe = (E[R] - Rf) / Sigma
+
+##assum,ptions in our cal:  252 trading days, per yr risk free rate = 0.5%
+table.AnnualizedReturns(MSFTvsTSLA, scale=252, Rf=0.005/252)
+#output was 
+> table.AnnualizedReturns(MSFTvsTSLA, scale=252, Rf=0.005/252)
+#                             TSLA   MSFT
+#Annualized Return           0.3905 0.2348
+#Annualized Std Dev          0.5087 0.2244
+#Annualized Sharpe (Rf=0.5%) 0.7539 1.0189
